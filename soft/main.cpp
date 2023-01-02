@@ -5,16 +5,16 @@
 int main(int argc, char **argv)
 {
     DataBase db{"base.txt"};
-    auto load = db.Load();
+    bool load = db.load();
     if (!load)
     {
         std::cout << "unable to create a database ";
         return 1;
     }
     DataBaseQuery query(&db);
-    auto success = query.Execute(argc, argv);
+    bool success = query.execute(argc, argv);
     if (!success)
         std::cout << "unknown format, -help for examples";
-    db.Save();
+    db.save();
     return 0;
 }

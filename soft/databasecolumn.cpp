@@ -1,11 +1,6 @@
 #include "databasecolumn.h"
 #include <algorithm>
 
-DataBaseColumn::DataBaseColumn(const std::vector<string>& args)
-{
-    for (auto i = 0u; i < values_.size(); ++i)
-        values_[i] = args[i];
-}
 std::ostream& operator<<(std::ostream& out, const DataBaseColumn& column)
 {
     const std::string bad_simbols{" .:"};

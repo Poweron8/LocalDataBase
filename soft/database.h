@@ -2,18 +2,18 @@
 #include <vector>
 #include "databasecolumn.h"
 
-
 class DataBase
 {
 public:
+    friend class DataBaseManager;
     DataBase(std::string file_name):file_name_(file_name){}
-    std::vector<DataBaseColumn>columns_;
-    bool Load();
-    void Save();
+    bool load();
+    void save();
+    bool restore();
+    bool open();
+    bool createTable();
 private:
     std::string file_name_;
-    bool Restore();
-    bool Open();
-    bool CreateTable();
+    std::vector<DataBaseColumn>columns_;
 };
 

@@ -3,16 +3,16 @@
 #include <fstream>
 
 
-bool DataBase::Load()
+bool DataBase::load()
 {
-    if (Open())
+    if (open())
         return true;
-    if (Restore())
+    if (restore())
         return true;
     return false;
 }
 
-void DataBase::Save()
+void DataBase::save()
 {
     std::ofstream out{file_name_, std::ios_base::out | std::ios_base::trunc};
     out << columns_.size() * DataBaseName::dataBaseNameCount << std::endl;
@@ -21,7 +21,7 @@ void DataBase::Save()
     out.close();
 }
 
-bool DataBase::Restore()
+bool DataBase::restore()
 {
     std::ofstream out{file_name_, std::ios_base::out | std::ios_base::trunc};
     if (!out.is_open())
@@ -30,7 +30,7 @@ bool DataBase::Restore()
     return true;
 }
 
-bool DataBase::Open()
+bool DataBase::open()
 {
     std::ifstream in{file_name_, std::ios_base::in};
     if (!in.is_open())
