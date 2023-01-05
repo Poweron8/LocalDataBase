@@ -3,10 +3,11 @@
 #include<vector>
 #include<array>
 #include "databasename.h"
-using string = std::string;
+
+#include <nlohmann/json.hpp>
 struct DataBaseColumn
 {
-    std::array<string, DataBaseName::dataBaseNameCount>values_;
+    std::array<std::string, DataBaseName::dataBaseNameCount>values_;
     DataBaseColumn() = default;
     ~DataBaseColumn() = default;
     friend std::ostream& operator<<(std::ostream& out, const DataBaseColumn& column);

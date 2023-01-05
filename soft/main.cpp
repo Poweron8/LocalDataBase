@@ -4,7 +4,7 @@
 
 int main(int argc, char **argv)
 {
-    DataBase db{"base.txt"};
+    DataBase db{"base.json"};
     bool load = db.load();
     if (!load)
     {

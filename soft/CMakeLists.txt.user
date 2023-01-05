@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 9.0.0, 2023-01-03T02:35:20. -->
+<!-- Written by QtCreator 9.0.0, 2023-01-05T19:07:18. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -381,6 +381,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">LocalDataBase</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.LocalDataBase</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">LocalDataBase</value>
+    <value type="QString" key="RunConfiguration.Arguments">-help</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

@@ -25,13 +25,13 @@ bool CommandSelect::parseArgs(const std::vector<std::string>& args)
         if (arg[start_pos] != '-')
             return false;
         SelectArgs ca;
-        std::vector<string>divs{"<=", ">=", "<", ">", " like ", "="};
-        string div;
+        std::vector<std::string>divs{"<=", ">=", "<", ">", " like ", "="};
+        std::string div;
         size_t div_pos{0};
         for (const auto& d : divs)
         {
             auto pos = arg.find(d);
-            if (pos != string::npos)
+            if (pos != std::string::npos)
             {
                 div = d;
                 div_pos = pos;
@@ -40,7 +40,7 @@ bool CommandSelect::parseArgs(const std::vector<std::string>& args)
         }
         if (div.empty())
             return false;
-        string left;
+        std::string left;
         left.assign(arg, start_pos, div_pos - start_pos);
         if (left == "-name")
             ca.db_name_ = DataBaseName::name;
