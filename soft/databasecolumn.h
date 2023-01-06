@@ -4,7 +4,6 @@
 #include<array>
 #include "databasename.h"
 
-#include <nlohmann/json.hpp>
 struct DataBaseColumn
 {
     std::array<std::string, DataBaseName::dataBaseNameCount>values_;

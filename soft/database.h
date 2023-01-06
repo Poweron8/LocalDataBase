@@ -9,7 +9,7 @@ public:
     DataBase(std::string file_name):file_name_(file_name){}
     bool load();
     void save();
-    bool restore();
+    bool isAvailableForCreation();
     bool open();
     bool createTable();
 private:

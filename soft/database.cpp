@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <fstream>
+#include <iostream>
 
 #include <nlohmann/json.hpp>
 
@@ -11,21 +12,23 @@ bool DataBase::load()
 {
     if (open())
         return true;
-    if (restore())
+    if (isAvailableForCreation())
         return true;
     return false;
 }
 
 void DataBase::save()
-{
-    std::ofstream out{file_name_, std::ios_base::out | std::ios_base::trunc};
+{  
+    json j;
     for (const auto& r : columns_){
-        out << r;
+        j.push_back(r.values_);
     }
+    std::ofstream out{file_name_, std::ios_base::out | std::ios_base::trunc};
+    out << j;
     out.close();
 }
 
-bool DataBase::restore()
+bool DataBase::isAvailableForCreation()
 {
     std::ofstream out{file_name_, std::ios_base::out | std::ios_base::trunc};
     if (!out.is_open())
@@ -49,9 +52,8 @@ bool DataBase::open()
 
     DataBaseColumn column;
     for (auto it = j.begin(); it != j.end(); ++it){
-        column.values_[(it - j.begin()) % DataBaseName::dataBaseNameCount] = *it;
-        if ((it - j.begin()) % DataBaseName::dataBaseNameCount == DataBaseName::dataBaseNameCount - 1 && it != j.begin())
-            columns_.push_back(column);
+        std::copy(it->begin(), it->end(), column.values_.begin());
+        columns_.push_back(column);
     }
     return true;
 }

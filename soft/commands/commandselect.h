@@ -1,7 +1,7 @@
 #pragma once
 
 #include "command.h"
-#include "../commandargs.h"
+#include "selectargs.h"
 
 class CommandSelect : public Command
 {
