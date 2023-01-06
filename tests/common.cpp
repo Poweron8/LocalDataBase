@@ -3,7 +3,7 @@
 #include <algorithm>
 
 #include "../soft/commands/selectargs.h"
-#include "../soft/databasecolumn.h"
+#include "../soft/databasetuple.h"
 #include "../soft/databasemanager.h"
 const unsigned Common::getTestCount()
 {
@@ -22,7 +22,7 @@ std::shared_ptr<DataBase> Common::makeDataBase10()
     auto base = std::make_shared<DataBase>(getDataBaseFileName());
     DataBaseManager manager { base.get() };
     const unsigned nColumn { 10 };
-    DataBaseColumn columns[nColumn];
+    DataBaseTuple columns[nColumn];
     columns[0].values_ = { "test00", "description 22", "2008-01-11 02:10", "cat2", "in process" };
     columns[1].values_ = { "test01", "description 15", "2006-03-23 03:20", "cat1", "done" };
     columns[2].values_ = { "test02", "description 4", "2004-04-24 03:10", "cat3", "in process" };
@@ -35,8 +35,8 @@ std::shared_ptr<DataBase> Common::makeDataBase10()
     columns[9].values_ = { "test09", "description 0", "2020-09-12 03:45", "cat0", "in process" };
 
     for (const auto c : columns)
-        manager.getColumns().push_back(c);
-    std::random_shuffle(manager.getColumns().begin(), manager.getColumns().end());
+        manager.getTuplesAccess().push_back(c);
+    std::random_shuffle(manager.getTuplesAccess().begin(), manager.getTuplesAccess().end());
     return base;
 }
 
@@ -44,22 +44,22 @@ SelectArgs Common::getRandomSelectTask()
 {
     std::vector<std::string> values { " ", "", "test 01", "_", "test00" };
     std::random_shuffle(values.begin(), values.end());
-    return { getRandomBaseName(), getRandomSign(), values[0] };
+    return { getRandomBaseAttribute(), getRandomSign(), values[0] };
 }
 
-std::string Common::nameToString(DataBaseName dataBaseName)
+std::string Common::nameToString(DataBaseAttribute dataBaseName)
 {
     switch (dataBaseName)
     {
-    case name:
+    case NAME:
         return "name";
-    case description:
+    case DESCRIPTION:
         return "description";
-    case date:
+    case DATE:
         return "date";
-    case category:
+    case CATEGORY:
         return "category";
-    case status:
+    case STATUS:
         return "status";
     default:
         return {};
@@ -83,9 +83,9 @@ bool Common::checkCondition(const std::string& s1, const std::string& sign, cons
     return false;
 }
 
-DataBaseName Common::getRandomBaseName()
+DataBaseAttribute Common::getRandomBaseAttribute()
 {
-    std::vector<DataBaseName> names { name, description, category, date, status };
+    std::vector<DataBaseAttribute> names { NAME, DESCRIPTION, CATEGORY, DATE, STATUS };
     std::random_shuffle(names.begin(), names.end());
     return names[0];
 }

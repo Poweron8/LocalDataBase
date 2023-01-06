@@ -15,7 +15,7 @@ TEST(CommandAddTest, ParseAndExecute)
 {
     auto c = std::make_unique<CommandAdd>();
     DataBase db { Common::getDataBaseFileName() };
-    db.restore();
+    db.isAvailableForCreation();
     DataBaseManager manager { &db };
 
     bool isSame { true };
@@ -26,11 +26,11 @@ TEST(CommandAddTest, ParseAndExecute)
         c->parseArgs(args);
         c->execute(&db);
 
-        if (!manager.getColumns().empty())
+        if (!manager.getTuplesAccess().empty())
         {
             for (size_t i = 0; i < args.size(); ++i)
             {
-                if (args[i] != manager.getColumns()[j].values_[i])
+                if (args[i] != manager.getTuplesAccess()[j].values_[i])
                     isSame = false;
             }
         }

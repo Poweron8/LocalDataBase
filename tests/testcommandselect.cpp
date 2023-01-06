@@ -32,21 +32,21 @@ TEST(CommandSelectTest, Execute)
         DataBase checkDataBase { "check.txt" };
         DataBaseManager checkManager { &checkDataBase };
         DataBaseManager manager { db.get() };
-        std::random_shuffle(manager.getColumns().begin(), manager.getColumns().end());
-        DataBaseName name = Common::getRandomBaseName();
-        std::string value = manager.getColumns()[0].values_[name];
+        std::random_shuffle(manager.getTuplesAccess().begin(), manager.getTuplesAccess().end());
+        DataBaseAttribute name = Common::getRandomBaseAttribute();
+        std::string value = manager.getTuplesAccess()[0].values_[name];
         std::string sign = Common::getRandomSign();
 
-        for (const auto& c : manager.getColumns())
+        for (const auto& c : manager.getTuplesAccess())
         {
             if (Common::checkCondition(c.values_[name], sign, value))
-                checkManager.getColumns().push_back(c);
+                checkManager.getTuplesAccess().push_back(c);
         }
         std::string task = "-" + Common::nameToString(name) + sign + value;
         auto c = std::make_unique<TestableCommandSelect>();
         c->parseArgs({ task });
         c->execute(db.get());
-        EXPECT_TRUE(manager.getColumns().size() == checkManager.getColumns().size())
+        EXPECT_TRUE(manager.getTuplesAccess().size() == checkManager.getTuplesAccess().size())
             << "task " << task << " is failed" << std::endl;
         ;
     }

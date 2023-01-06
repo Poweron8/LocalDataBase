@@ -17,8 +17,8 @@ struct Common
     const static std::vector<std::string> getDefaultArgs();
     static std::shared_ptr<DataBase> makeDataBase10();
     static SelectArgs getRandomSelectTask();
-    static std::string nameToString(DataBaseName dataBaseName);
+    static std::string nameToString(DataBaseAttribute dataBaseName);
     static bool checkCondition(const std::string& s1, const std::string& sign, const std::string& s2);
-    static DataBaseName getRandomBaseName();
+    static DataBaseAttribute getRandomBaseAttribute();
     static std::string getRandomSign();
 };

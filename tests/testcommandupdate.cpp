@@ -18,24 +18,24 @@ TEST(CommandUpdateTest, ParseAndExecute)
     DataBaseManager manager { db.get() };
     auto args = Common::getDefaultArgs();
     auto argsCheck = args;
-    argsCheck[DataBaseName::description] = "check";
-    DataBaseColumn column;
-    DataBaseColumn columnCheck;
+    argsCheck[DataBaseAttribute::DESCRIPTION] = "check";
+    DataBaseTuple column;
+    DataBaseTuple columnCheck;
     std::copy(args.begin(), args.end(), column.values_.begin());
     std::copy(argsCheck.begin(), argsCheck.end(), columnCheck.values_.begin());
-    manager.getColumns().push_back(column);
+    manager.getTuplesAccess().push_back(column);
     bool isCheck { false };
 
-    for (const auto& c : manager.getColumns())
-        if (c.values_[DataBaseName::description] == "check")
+    for (const auto& c : manager.getTuplesAccess())
+        if (c.values_[DataBaseAttribute::DESCRIPTION] == "check")
             isCheck = true;
 
     EXPECT_FALSE(isCheck);
     isCheck = false;
     c->parseArgs(argsCheck);
     c->execute(db.get());
-    for (const auto& c : manager.getColumns())
-        if (c.values_[DataBaseName::description] == "check")
+    for (const auto& c : manager.getTuplesAccess())
+        if (c.values_[DataBaseAttribute::DESCRIPTION] == "check")
             isCheck = true;
 
     EXPECT_TRUE(isCheck);

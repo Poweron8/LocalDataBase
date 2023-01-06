@@ -19,17 +19,17 @@ TEST(CommandDeleteTest, ParseAndExecute)
     {
         auto db = Common::makeDataBase10();
         DataBaseManager manager { db.get() };
-        size_t size = manager.getColumns().size();
-        std::string name = manager.getColumns()[0].values_[DataBaseName::name];
-        std::random_shuffle(manager.getColumns().begin(), manager.getColumns().end());
+        size_t size = manager.getTuplesAccess().size();
+        std::string name = manager.getTuplesAccess()[0].values_[DataBaseAttribute::NAME];
+        std::random_shuffle(manager.getTuplesAccess().begin(), manager.getTuplesAccess().end());
         c->parseArgs({ name });
         c->execute(db.get());
-        for (const auto& c : manager.getColumns())
+        for (const auto& c : manager.getTuplesAccess())
         {
-            if (c.values_[DataBaseName::name] == name)
+            if (c.values_[DataBaseAttribute::NAME] == name)
                 isError = true;
         }
-        EXPECT_TRUE(manager.getColumns().size() == size - 1);
+        EXPECT_TRUE(manager.getTuplesAccess().size() == size - 1);
     }
     EXPECT_FALSE(isError);
 }
