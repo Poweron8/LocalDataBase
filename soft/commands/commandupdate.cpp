@@ -1,7 +1,8 @@
 #include "commandupdate.h"
-#include <algorithm>
-#include "../databasemanager.h"
 
+#include <algorithm>
+
+#include "../databasemanager.h"
 
 bool commandUpdate::validateArgsCount(const std::vector<std::string>& args) const
 {
@@ -17,7 +18,7 @@ bool commandUpdate::parseArgs(const std::vector<std::string>& args)
 void commandUpdate::execute(DataBase* dataBase) const
 {
     DataBaseManager dbm(dataBase);
-    auto dbit =  dbm.getDataBaseIterator(DataBaseName::name, column_.values_[DataBaseName::name]);
+    auto dbit = dbm.getDataBaseIterator(DataBaseName::name, column_.values_[DataBaseName::name]);
     if (dbit != dbm.getColumns().end())
     {
         for (int i = 0; i < dataBaseNameCount; ++i)

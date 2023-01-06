@@ -1,5 +1,7 @@
 #include "commandselect.h"
+
 #include <algorithm>
+
 #include "../databasemanager.h"
 
 bool CommandSelect::validateArgsCount(const std::vector<std::string>& args) const
@@ -16,7 +18,7 @@ bool CommandSelect::parseArgs(const std::vector<std::string>& args)
         if (arg == "and")
             continue;
         auto start_pos = 0;
-        auto fin_pos = arg.length()-1;
+        auto fin_pos = arg.length() - 1;
         if (arg[start_pos] == '\"' && arg[fin_pos] == '\"')
         {
             ++start_pos;
@@ -25,9 +27,9 @@ bool CommandSelect::parseArgs(const std::vector<std::string>& args)
         if (arg[start_pos] != '-')
             return false;
         SelectArgs ca;
-        std::vector<std::string>divs{"<=", ">=", "<", ">", " like ", "="};
+        std::vector<std::string> divs { "<=", ">=", "<", ">", " like ", "=" };
         std::string div;
-        size_t div_pos{0};
+        size_t div_pos { 0 };
         for (const auto& d : divs)
         {
             auto pos = arg.find(d);
@@ -64,10 +66,10 @@ bool CommandSelect::parseArgs(const std::vector<std::string>& args)
 
 void CommandSelect::execute(DataBase* dataBase) const
 {
-    DataBase db{*dataBase};
+    DataBase db { *dataBase };
     DataBaseManager manager(&db);
 
-    for (const auto& c: selectArgs_)
+    for (const auto& c : selectArgs_)
         manager.filtDataBase(manager.getColumns(), c.db_name_, c.sign_, c.value_);
     for (const auto& column : manager.getColumns())
         std::cout << column << std::endl;

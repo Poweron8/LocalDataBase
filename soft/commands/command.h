@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+
 #include "../database.h"
 
 class Command
@@ -12,4 +13,3 @@ public:
     virtual bool parseArgs(const std::vector<std::string>& args) = 0;
     virtual void execute(DataBase* dataBase) const = 0;
 };
-

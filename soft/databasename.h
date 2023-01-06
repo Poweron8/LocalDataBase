@@ -9,4 +9,3 @@ enum DataBaseName
     status,
     dataBaseNameCount
 };
-

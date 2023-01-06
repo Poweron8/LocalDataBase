@@ -1,10 +1,11 @@
 #include <iostream>
+
 #include "database.h"
 #include "databasequerry.h"
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
-    DataBase db{"base.json"};
+    DataBase db { "base.json" };
     bool load = db.load();
     if (!load)
     {

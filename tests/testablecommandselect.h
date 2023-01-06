@@ -5,8 +5,7 @@
 class TestableCommandSelect : public CommandSelect
 {
 public:
-    auto getSelectArgs()->decltype(selectArgs_) const;
+    auto getSelectArgs() -> decltype(selectArgs_) const;
     void filtDataBase(std::vector<DataBaseColumn>& args, size_t number, std::string sign, std::string value);
     virtual void execute(DataBase* dataBase) const override;
 };
-

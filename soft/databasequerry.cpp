@@ -1,17 +1,18 @@
 #include "databasequerry.h"
-#include "commands/commandadd.h"
-#include "commands/commanddone.h"
-#include "commands/commandupdate.h"
-#include "commands/commanddelete.h"
-#include "commands/commandselect.h"
-#include "commands/commandhelp.h"
 
-bool DataBaseQuery::execute(int argc, char **argv)
+#include "commands/commandadd.h"
+#include "commands/commanddelete.h"
+#include "commands/commanddone.h"
+#include "commands/commandhelp.h"
+#include "commands/commandselect.h"
+#include "commands/commandupdate.h"
+
+bool DataBaseQuery::execute(int argc, char** argv)
 {
     if (!db_)
         return false;
 
-    std::vector<std::string>args;
+    std::vector<std::string> args;
     for (int i = 1; i < argc; ++i)
         args.push_back(argv[i]);
 
@@ -49,5 +50,3 @@ std::unique_ptr<Command> DataBaseQuery::makeCommand(std::string command)
         return std::make_unique<CommandHelp>();
     return nullptr;
 }
-
-

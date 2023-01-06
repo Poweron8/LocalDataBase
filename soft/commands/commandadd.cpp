@@ -1,7 +1,8 @@
 #include "commandadd.h"
-#include <algorithm>
-#include "../databasemanager.h"
 
+#include <algorithm>
+
+#include "../databasemanager.h"
 
 bool CommandAdd::validateArgsCount(const std::vector<std::string>& args) const
 {
@@ -17,7 +18,7 @@ bool CommandAdd::parseArgs(const std::vector<std::string>& args)
 void CommandAdd::execute(DataBase* dataBase) const
 {
     DataBaseManager dbm(dataBase);
-    auto dbit =  dbm.getDataBaseIterator(DataBaseName::name, column_.values_[DataBaseName::name]);
+    auto dbit = dbm.getDataBaseIterator(DataBaseName::name, column_.values_[DataBaseName::name]);
     if (dbit == dbm.getColumns().end())
-       dbm.getColumns().emplace_back(column_);
+        dbm.getColumns().emplace_back(column_);
 }
