@@ -18,7 +18,7 @@ bool CommandDelete::parseArgs(const std::vector<std::string>& args)
 void CommandDelete::execute(DataBase* dataBase) const
 {
     DataBaseManager dbm(dataBase);
-    auto dbit = dbm.getDataBaseIterator(DataBaseName::name, name_);
-    if (dbit != dbm.getColumns().end())
-        dbm.getColumns().erase(dbit);
+    auto dbit = dbm.getDataBaseIterator(DataBaseAttribute::NAME, name_);
+    if (dbit != dbm.getTuplesAccess().end())
+        dbm.getTuplesAccess().erase(dbit);
 }

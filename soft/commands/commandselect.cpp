@@ -45,15 +45,15 @@ bool CommandSelect::parseArgs(const std::vector<std::string>& args)
         std::string left;
         left.assign(arg, start_pos, div_pos - start_pos);
         if (left == "-name")
-            ca.db_name_ = DataBaseName::name;
+            ca.db_name_ = DataBaseAttribute::NAME;
         else if (left == "-description")
-            ca.db_name_ = DataBaseName::description;
+            ca.db_name_ = DataBaseAttribute::DESCRIPTION;
         else if (left == "-date")
-            ca.db_name_ = DataBaseName::date;
+            ca.db_name_ = DataBaseAttribute::DATE;
         else if (left == "-category")
-            ca.db_name_ = DataBaseName::category;
+            ca.db_name_ = DataBaseAttribute::CATEGORY;
         else if (left == "-status")
-            ca.db_name_ = DataBaseName::status;
+            ca.db_name_ = DataBaseAttribute::STATUS;
         else
             return false;
 
@@ -70,7 +70,7 @@ void CommandSelect::execute(DataBase* dataBase) const
     DataBaseManager manager(&db);
 
     for (const auto& c : selectArgs_)
-        manager.filtDataBase(manager.getColumns(), c.db_name_, c.sign_, c.value_);
-    for (const auto& column : manager.getColumns())
-        std::cout << column << std::endl;
+        manager.filtDataBase(manager.getTuplesAccess(), c.db_name_, c.sign_, c.value_);
+    for (const auto& tuple : manager.getTuplesAccess())
+        std::cout << tuple << std::endl;
 }

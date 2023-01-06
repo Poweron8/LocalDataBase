@@ -19,7 +19,7 @@ bool DataBase::load()
 void DataBase::save()
 {
     json j;
-    for (const auto& r : columns_)
+    for (const auto& r : tuples_)
     {
         j.push_back(r.values_);
     }
@@ -52,11 +52,11 @@ bool DataBase::open()
         return false;
     }
 
-    DataBaseColumn column;
+    DataBaseTuple tuple;
     for (auto it = j.begin(); it != j.end(); ++it)
     {
-        std::copy(it->begin(), it->end(), column.values_.begin());
-        columns_.push_back(column);
+        std::copy(it->begin(), it->end(), tuple.values_.begin());
+        tuples_.push_back(tuple);
     }
     return true;
 }

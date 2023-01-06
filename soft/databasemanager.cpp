@@ -4,25 +4,25 @@
 
 #include "algorithm"
 
-std::vector<DataBaseColumn>::iterator DataBaseManager::getDataBaseIterator(size_t number, const std::string& value)
+std::vector<DataBaseTuple>::iterator DataBaseManager::getDataBaseIterator(size_t number, const std::string& value)
 {
-    std::sort(dataBase_->columns_.begin(), dataBase_->columns_.end(),
-        [&number](const DataBaseColumn& r1, const DataBaseColumn& r2)
+    std::sort(dataBase_->tuples_.begin(), dataBase_->tuples_.end(),
+        [&number](const DataBaseTuple& r1, const DataBaseTuple& r2)
         {
             return r1.values_[number] < r2.values_[number];
         });
-    return std::find_if(dataBase_->columns_.begin(), dataBase_->columns_.end(),
+    return std::find_if(dataBase_->tuples_.begin(), dataBase_->tuples_.end(),
         [&number, &value](const auto& r1)
         { return r1.values_[number] == value; });
 }
-std::vector<DataBaseColumn>& DataBaseManager::getColumns()
+std::vector<DataBaseTuple>& DataBaseManager::getTuplesAccess()
 {
-    return dataBase_->columns_;
+    return dataBase_->tuples_;
 }
-void DataBaseManager::filtDataBase(std::vector<DataBaseColumn>& db_columns, size_t number, std::string sign,
+void DataBaseManager::filtDataBase(std::vector<DataBaseTuple>& db_tuples, size_t number, std::string sign,
     std::string value)
 {
-    std::unordered_map<std::string, std::function<bool(const DataBaseColumn&, const DataBaseColumn&)>> compMapSort {
+    std::unordered_map<std::string, std::function<bool(const DataBaseTuple&, const DataBaseTuple&)>> compMapSort {
         { "<", [&](const auto& c1, const auto& c2)
             { return c1.values_[number] < c2.values_[number]; } },
         { "<=", [&](const auto& c1, const auto& c2)
@@ -37,9 +37,9 @@ void DataBaseManager::filtDataBase(std::vector<DataBaseColumn>& db_columns, size
             { return c1.values_[number] < c2.values_[number]; } }
     };
 
-    sort(db_columns.begin(), db_columns.end(), compMapSort[sign]);
+    sort(db_tuples.begin(), db_tuples.end(), compMapSort[sign]);
 
-    std::unordered_map<std::string, std::function<bool(const DataBaseColumn&)>> compMapErase {
+    std::unordered_map<std::string, std::function<bool(const DataBaseTuple&)>> compMapErase {
         { "<", [&](const auto& c1)
             { return c1.values_[number] < value; } },
         { "<=", [&](const auto& c1)
@@ -55,40 +55,40 @@ void DataBaseManager::filtDataBase(std::vector<DataBaseColumn>& db_columns, size
     };
 
     auto fUn = compMapErase[sign];
-    auto pp = find_if_not(db_columns.begin(), db_columns.end(), [&](const DataBaseColumn& c)
+    auto pp = find_if_not(db_tuples.begin(), db_tuples.end(), [&](const DataBaseTuple& c)
         { return fUn(c); });
 
-    if (pp != db_columns.end())
+    if (pp != db_tuples.end())
     {
         if (sign == "=")
         {
-            std::vector<DataBaseColumn> temp;
-            for (auto& it = pp; it != db_columns.end(); ++it)
+            std::vector<DataBaseTuple> temp;
+            for (auto& it = pp; it != db_tuples.end(); ++it)
                 if (it->values_[number] == value)
                     temp.push_back(*it);
-            db_columns.clear();
+            db_tuples.clear();
             for (const auto& t : temp)
-                db_columns.push_back(t);
+                db_tuples.push_back(t);
         }
         else if (sign == " like ")
         {
-            std::vector<DataBaseColumn> temp;
-            for (auto& it = pp; it != db_columns.end(); ++it)
+            std::vector<DataBaseTuple> temp;
+            for (auto& it = pp; it != db_tuples.end(); ++it)
                 if (it->values_[number].find(value) != std::string::npos)
                     temp.push_back(*it);
-            db_columns.clear();
+            db_tuples.clear();
             for (const auto& t : temp)
-                db_columns.push_back(t);
+                db_tuples.push_back(t);
         }
         else
         {
-            db_columns.erase(pp, db_columns.end());
+            db_tuples.erase(pp, db_tuples.end());
         }
     }
     else if (sign == "=" || sign == " like ")
     {
-        db_columns.clear();
+        db_tuples.clear();
     }
-    std::sort(db_columns.begin(), db_columns.end(), [&number](const DataBaseColumn& r1, const DataBaseColumn& r2)
+    std::sort(db_tuples.begin(), db_tuples.end(), [&number](const DataBaseTuple& r1, const DataBaseTuple& r2)
         { return r1.values_[number] < r2.values_[number]; });
 }

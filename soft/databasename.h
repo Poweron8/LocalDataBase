@@ -1,11 +1,11 @@
 #pragma once
 
-enum DataBaseName
+enum DataBaseAttribute
 {
-    name,
-    description,
-    date,
-    category,
-    status,
-    dataBaseNameCount
+    NAME,
+    DESCRIPTION,
+    DATE,
+    CATEGORY,
+    STATUS,
+    DATA_BASE_DEGREE
 };

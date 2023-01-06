@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 
-#include "databasecolumn.h"
+#include "databasetuple.h"
 
 class DataBase
 {
@@ -9,8 +9,7 @@ public:
     friend class DataBaseManager;
     DataBase(std::string file_name)
         : file_name_(file_name)
-    {
-    }
+    {}
     bool load();
     void save();
     bool isAvailableForCreation();
@@ -19,5 +18,5 @@ public:
 
 private:
     std::string file_name_;
-    std::vector<DataBaseColumn> columns_;
+    std::vector<DataBaseTuple> tuples_;
 };

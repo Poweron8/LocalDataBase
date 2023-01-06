@@ -18,7 +18,7 @@ bool CommandDone::parseArgs(const std::vector<std::string>& args)
 void CommandDone::execute(DataBase* dataBase) const
 {
     DataBaseManager dbm(dataBase);
-    auto dbit = dbm.getDataBaseIterator(DataBaseName::name, name_);
-    if (dbit != dbm.getColumns().end())
-        dbit->values_[DataBaseName::status] = "done";
+    auto dbit = dbm.getDataBaseIterator(DataBaseAttribute::NAME, name_);
+    if (dbit != dbm.getTuplesAccess().end())
+        dbit->values_[DataBaseAttribute::STATUS] = "done";
 }

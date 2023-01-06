@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../databasecolumn.h"
 #include "command.h"
 
 class CommandDelete : public Command

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../databasecolumn.h"
+#include "../databasetuple.h"
 #include "command.h"
 
 class commandUpdate : public Command
@@ -11,5 +11,5 @@ public:
     void execute(DataBase* dataBase) const override;
 
 private:
-    DataBaseColumn column_;
+    DataBaseTuple tuple_;
 };
