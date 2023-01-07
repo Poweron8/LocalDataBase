@@ -4,8 +4,7 @@
 
 #include "../database.h"
 
-class Command
-{
+class Command {
 public:
     virtual ~Command() = default;
 

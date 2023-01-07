@@ -5,8 +5,7 @@ TEST(CommandSelectTest, Parse)
 {
     auto c = std::make_unique<TestableCommandSelect>();
     std::vector<std::string> sArgs;
-    for (size_t i = 0; i < Common::getTestCount(); ++i)
-    {
+    for (size_t i = 0; i < Common::getTestCount(); ++i) {
         auto args = Common::getRandomSelectTask();
         sArgs.push_back("-" + Common::nameToString(args.db_name_) + args.sign_ + args.value_);
         sArgs.push_back("and");
@@ -16,8 +15,7 @@ TEST(CommandSelectTest, Parse)
     auto parse = c->getSelectArgs();
     ASSERT_TRUE(parse.size() == (sArgs.size() + 1) / 2);
     bool isError { false };
-    for (size_t i = 0; i < Common::getTestCount(); ++i)
-    {
+    for (size_t i = 0; i < Common::getTestCount(); ++i) {
         if ("-" + Common::nameToString(parse[i].db_name_) + parse[i].sign_ + parse[i].value_ != sArgs[i * 2])
             isError = true;
     }
@@ -26,8 +24,7 @@ TEST(CommandSelectTest, Parse)
 
 TEST(CommandSelectTest, Execute)
 {
-    for (size_t i = 0; i < Common::getTestCount(); ++i)
-    {
+    for (size_t i = 0; i < Common::getTestCount(); ++i) {
         auto db = Common::makeDataBase10();
         DataBase checkDataBase { "check.txt" };
         DataBaseManager checkManager { &checkDataBase };
@@ -37,8 +34,7 @@ TEST(CommandSelectTest, Execute)
         std::string value = manager.getTuplesAccess()[0].values_[name];
         std::string sign = Common::getRandomSign();
 
-        for (const auto& c : manager.getTuplesAccess())
-        {
+        for (const auto& c : manager.getTuplesAccess()) {
             if (Common::checkCondition(c.values_[name], sign, value))
                 checkManager.getTuplesAccess().push_back(c);
         }

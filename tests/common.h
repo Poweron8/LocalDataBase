@@ -10,8 +10,7 @@
 #include <vector>
 
 class SelectArgs;
-struct Common
-{
+struct Common {
     const static unsigned getTestCount();
     const static std::string getDataBaseFileName();
     const static std::vector<std::string> getDefaultArgs();

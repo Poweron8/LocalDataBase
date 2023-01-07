@@ -19,23 +19,19 @@ TEST(CommandAddTest, ParseAndExecute)
     DataBaseManager manager { &db };
 
     bool isSame { true };
-    for (size_t j = 0; j < 1000; ++j)
-    {
+    for (size_t j = 0; j < 1000; ++j) {
         auto firstArg = "add task" + std::to_string(j);
         std::vector<std::string> args { firstArg, "task 07", "2009-06-12 02:00", "cat2", "in process" };
         c->parseArgs(args);
         c->execute(&db);
 
-        if (!manager.getTuplesAccess().empty())
-        {
-            for (size_t i = 0; i < args.size(); ++i)
-            {
+        if (!manager.getTuplesAccess().empty()) {
+            for (size_t i = 0; i < args.size(); ++i) {
                 if (args[i] != manager.getTuplesAccess()[j].values_[i])
                     isSame = false;
             }
         }
-        else
-        {
+        else {
             isSame = false;
         }
     }

@@ -4,8 +4,7 @@
 #include "commands/command.h"
 #include "database.h"
 
-class DataBaseQuery
-{
+class DataBaseQuery {
     DataBase* db_;
 
 public:

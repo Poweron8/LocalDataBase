@@ -2,8 +2,7 @@
 #include <string>
 
 #include "../databasename.h"
-class SelectArgs
-{
+class SelectArgs {
 public:
     DataBaseAttribute db_name_;
     std::string sign_;

@@ -7,8 +7,7 @@ int main(int argc, char** argv)
 {
     DataBase db { "base.json" };
     bool load = db.load();
-    if (!load)
-    {
+    if (!load) {
         std::cout << "unable to create a database ";
         return 1;
     }

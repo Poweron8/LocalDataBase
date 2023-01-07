@@ -3,8 +3,7 @@
 #include "command.h"
 #include "selectargs.h"
 
-class CommandSelect : public Command
-{
+class CommandSelect : public Command {
 public:
     bool validateArgsCount(const std::vector<std::string>& args) const override;
     bool parseArgs(const std::vector<std::string>& args) override;

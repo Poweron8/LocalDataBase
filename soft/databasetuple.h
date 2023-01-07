@@ -5,8 +5,7 @@
 
 #include "databasename.h"
 
-struct DataBaseTuple
-{
+struct DataBaseTuple {
     std::array<std::string, DataBaseAttribute::DATA_BASE_DEGREE> values_;
     DataBaseTuple() = default;
     ~DataBaseTuple() = default;

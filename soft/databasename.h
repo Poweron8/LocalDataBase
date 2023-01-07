@@ -1,7 +1,6 @@
 #pragma once
 
-enum DataBaseAttribute
-{
+enum DataBaseAttribute {
     NAME,
     DESCRIPTION,
     DATE,

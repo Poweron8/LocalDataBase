@@ -19,8 +19,7 @@ bool DataBase::load()
 void DataBase::save()
 {
     json j;
-    for (const auto& r : tuples_)
-    {
+    for (const auto& r : tuples_) {
         j.push_back(r.values_);
     }
     std::ofstream out { file_name_, std::ios_base::out | std::ios_base::trunc };
@@ -43,18 +42,15 @@ bool DataBase::open()
     if (!in.is_open())
         return false;
     json j;
-    try
-    {
+    try {
         j = json::parse(in);
     }
-    catch (...)
-    {
+    catch (...) {
         return false;
     }
 
     DataBaseTuple tuple;
-    for (auto it = j.begin(); it != j.end(); ++it)
-    {
+    for (auto it = j.begin(); it != j.end(); ++it) {
         std::copy(it->begin(), it->end(), tuple.values_.begin());
         tuples_.push_back(tuple);
     }

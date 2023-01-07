@@ -3,8 +3,8 @@
 #include <algorithm>
 
 #include "../soft/commands/selectargs.h"
-#include "../soft/databasetuple.h"
 #include "../soft/databasemanager.h"
+#include "../soft/databasetuple.h"
 const unsigned Common::getTestCount()
 {
     return 1000;
@@ -49,8 +49,7 @@ SelectArgs Common::getRandomSelectTask()
 
 std::string Common::nameToString(DataBaseAttribute dataBaseName)
 {
-    switch (dataBaseName)
-    {
+    switch (dataBaseName) {
     case NAME:
         return "name";
     case DESCRIPTION:

@@ -2,8 +2,7 @@
 
 #include "command.h"
 
-class CommandDone : public Command
-{
+class CommandDone : public Command {
 public:
     bool validateArgsCount(const std::vector<std::string>& args) const override;
     bool parseArgs(const std::vector<std::string>& args) override;

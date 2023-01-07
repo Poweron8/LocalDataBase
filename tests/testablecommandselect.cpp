@@ -10,8 +10,7 @@ auto TestableCommandSelect::getSelectArgs() -> decltype(selectArgs_) const
 void TestableCommandSelect::execute(DataBase* dataBase) const
 {
     DataBaseManager manager { dataBase };
-    for (const auto& args : selectArgs_)
-    {
+    for (const auto& args : selectArgs_) {
         manager.filtDataBase(manager.getTuplesAccess(), args.db_name_, args.sign_, args.value_);
     }
 }

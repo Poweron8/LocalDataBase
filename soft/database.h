@@ -3,13 +3,13 @@
 
 #include "databasetuple.h"
 
-class DataBase
-{
+class DataBase {
 public:
     friend class DataBaseManager;
     DataBase(std::string file_name)
         : file_name_(file_name)
-    {}
+    {
+    }
     bool load();
     void save();
     bool isAvailableForCreation();

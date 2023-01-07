@@ -3,8 +3,7 @@
 #include "../databasetuple.h"
 #include "command.h"
 
-class commandUpdate : public Command
-{
+class commandUpdate : public Command {
 public:
     bool validateArgsCount(const std::vector<std::string>& args) const override;
     bool parseArgs(const std::vector<std::string>& args) override;
