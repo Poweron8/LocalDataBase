@@ -17,8 +17,7 @@ std::vector<DataBaseTuple>& DataBaseManager::getTuplesAccess()
 {
     return dataBase_->tuples_;
 }
-void DataBaseManager::filtDataBase(std::vector<DataBaseTuple>& db_tuples, size_t number, std::string sign,
-    std::string value)
+void DataBaseManager::filtDataBase(std::vector<DataBaseTuple>& db_tuples, size_t number, std::string sign, std::string value)
 {
     std::unordered_map<std::string, std::function<bool(const DataBaseTuple&, const DataBaseTuple&)>> compMapSort {
         { "<", [&](const auto& c1, const auto& c2) { return c1.values_[number] < c2.values_[number]; } },

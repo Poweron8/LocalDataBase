@@ -32,7 +32,7 @@ bool DataBaseQuery::execute(int argc, char** argv)
     return true;
 }
 
-std::unique_ptr<Command> DataBaseQuery::makeCommand(std::string command)
+std::unique_ptr<Command> DataBaseQuery::makeCommand(const std::string& command)
 {
     if (command == "-add")
         return std::make_unique<CommandAdd>();

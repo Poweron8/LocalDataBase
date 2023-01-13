@@ -13,5 +13,5 @@ public:
     bool execute(int argc, char** argv);
 
 private:
-    std::unique_ptr<Command> makeCommand(std::string command);
+    std::unique_ptr<Command> makeCommand(const std::string& command);
 };

@@ -15,7 +15,7 @@ const std::string Common::getDataBaseFileName()
 }
 const std::vector<std::string> Common::getDefaultArgs()
 {
-    return { "test", "task 07", "2009-06-12 02:00", "cat2", "in process" };
+    return { "test", "task 07", "2009-06-12 02:00", "cazt2", "in process" };
 }
 std::shared_ptr<DataBase> Common::makeDataBase10()
 {
